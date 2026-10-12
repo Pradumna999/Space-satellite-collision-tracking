@@ -1,0 +1,3 @@
+object_id,object_name,epoch,time_system,frame,x_km,y_km,z_km,vx_km_s,vy_km_s,vz_km_s,hard_body_radius_m
+SMP-S1,SAMPLE STATE 1,2026-10-10T00:00:00,UTC,GCRF,7000.0,0,0,0,7.546,0,5
+SMP-S2,,2026-10-10T00:00:00,UTC,GCRF,7000.2,0,0,0,0,7.546,

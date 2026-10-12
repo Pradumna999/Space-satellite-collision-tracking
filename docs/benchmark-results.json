@@ -1,0 +1,66 @@
+{
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 141 Stepping 1, GenuineIntel",
+    "cpus": 12,
+    "memory_gb": 16.9,
+    "measured_utc": "2026-10-11T18:05:17.800579+00:00",
+    "data": "SYNTHETIC catalogue (astral.core.synthetic.demo_catalogue, seed 5)",
+    "threshold_km": 5.0
+  },
+  "results": [
+    {
+      "objects": 50,
+      "window_h": 24.0,
+      "step_s": 30.0,
+      "runtime_s": 1.193,
+      "pairs_total": 1225,
+      "pairs_radial_band_overlap": 781,
+      "pairs_flagged": 1,
+      "encounters": 1,
+      "propagation_evaluations": 144080,
+      "peak_traced_memory_mb": 14.2,
+      "rss_delta_mb": 0.3
+    },
+    {
+      "objects": 200,
+      "window_h": 24.0,
+      "step_s": 30.0,
+      "runtime_s": 3.486,
+      "pairs_total": 19900,
+      "pairs_radial_band_overlap": 13201,
+      "pairs_flagged": 2,
+      "encounters": 1,
+      "propagation_evaluations": 576260,
+      "peak_traced_memory_mb": 56.1,
+      "rss_delta_mb": 0.6
+    },
+    {
+      "objects": 800,
+      "window_h": 24.0,
+      "step_s": 30.0,
+      "runtime_s": 5.956,
+      "pairs_total": 319600,
+      "pairs_radial_band_overlap": 214562,
+      "pairs_flagged": 55,
+      "encounters": 23,
+      "propagation_evaluations": 2306504,
+      "peak_traced_memory_mb": 223.9,
+      "rss_delta_mb": 0.9
+    },
+    {
+      "objects": 2000,
+      "window_h": 24.0,
+      "step_s": 30.0,
+      "runtime_s": 11.639,
+      "pairs_total": 1999000,
+      "pairs_radial_band_overlap": 1344002,
+      "pairs_flagged": 294,
+      "encounters": 150,
+      "propagation_evaluations": 5771428,
+      "peak_traced_memory_mb": 559.4,
+      "rss_delta_mb": 1.7
+    }
+  ]
+}

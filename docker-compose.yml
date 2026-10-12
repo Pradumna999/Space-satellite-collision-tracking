@@ -1,0 +1,55 @@
+# Production-like stack: PostgreSQL, API (serves the SPA), and a separate worker.
+# Usage: cp .env.example .env  (edit secrets)  &&  docker compose up -d --build
+# Put a TLS-terminating reverse proxy in front (see DEPLOYMENT.md); the API sets
+# Secure cookies and HSTS when ASTRAL_COOKIE_SECURE=true.
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: astral
+      POSTGRES_USER: astral
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U astral -d astral"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  api:
+    build: .
+    env_file: .env
+    environment:
+      ASTRAL_DATABASE_URL: postgresql+psycopg://astral:${POSTGRES_PASSWORD}@db:5432/astral
+      ASTRAL_WORKER_MODE: external
+    volumes: [objects:/data]
+    ports: ["127.0.0.1:${ASTRAL_HTTP_PORT:-8000}:8000"]
+    depends_on:
+      db: { condition: service_healthy }
+    restart: unless-stopped
+
+  worker:
+    build: .
+    env_file: .env
+    environment:
+      ASTRAL_DATABASE_URL: postgresql+psycopg://astral:${POSTGRES_PASSWORD}@db:5432/astral
+      ASTRAL_WORKER_MODE: external
+    volumes: [objects:/data]
+    command: ["python", "-m", "astral.worker"]
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import psutil,sys; sys.exit(0 if any('astral.worker' in ' '.join(p.cmdline()) for p in psutil.process_iter()) else 1)\""]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      db: { condition: service_healthy }
+      api: { condition: service_started }
+    deploy:
+      resources:
+        limits: { cpus: "2", memory: 2g }
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  objects:
