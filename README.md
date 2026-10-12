@@ -266,8 +266,4 @@ ASTRAL is **research and evaluation software**. It has not been independently qu
 
 See [ROADMAP.md](ROADMAP.md) and [MODEL_AND_DATA_LIMITATIONS.md](MODEL_AND_DATA_LIMITATIONS.md).
 
----
 
-## License
-
-Licensed under the Apache License 2.0. Third-party components and their licences are listed in [LICENSES.md](LICENSES.md).
